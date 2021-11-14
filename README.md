@@ -30,6 +30,7 @@ Take a look to the original project:
 
 The hand is made out of 3D printed parts. You can find those parts as well as files for construction in the [3D model section](./MANO-Zeus\3D_model).
 
+And a list of the progress of impresion in the [3d Model List](./3D_model).
   
 <!---                   FOTOS
  <img width=500px src="images/../Doc/images/robot_generic.png" alt="Generic version"></a>
