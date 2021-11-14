@@ -23,7 +23,7 @@ The main idea behind this project is inspired on the InMoov project, but we are 
 Take a look to the original project:
 
 - [InMoov's project](https://inmoov.fr/).
-<img width=500px src="/Doc/fig/InMoov.png" alt="Generic version"></a>
+<img width=500px src="/Doc/fig/InMoov_project.png" alt="Generic version"></a>
 
 ## Mechanics
 
