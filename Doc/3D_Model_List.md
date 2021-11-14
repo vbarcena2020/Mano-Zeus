@@ -4,7 +4,7 @@
 
 Here we have a track of the 3D printed parts of the project
 
-- [ ] [Dedo Meñique](3D_model/Auriculaire3.stl)
+- [ ] [Dedo Meñique](https://github.com/RoboTech-URJC/Mano-Zeus/blob/main/3D_model/Auriculaire3.stl)
 - [ ] [Espaciador](3D_model/Bolt_entretorise7.stl)
 - [x] [Dedo Indice](3D_model/Index3.stl)
 - [x] [Dedo Corazon](3D_model/Majeure3.stl)
