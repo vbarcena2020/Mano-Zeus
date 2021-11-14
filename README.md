@@ -23,21 +23,24 @@ The main idea behind this project is inspired on the InMoov project, but we are 
 Take a look to the original project:
 
 - [InMoov's project](https://inmoov.fr/).
+<img width=500px src="/Doc/fig/InMoov.png" alt="Generic version"></a>
 
 ## Mechanics
 
 <!--- <img width=400px src="Doc/images/Explode.png" alt="explode"></a> --->
 
-The hand is made out of 3D printed parts. You can find those parts as well as files for construction in the [3D model section](./MANO-Zeus\3D_model).
+The hand is made out of 3D printed parts. You can find those parts as well as files for construction in the [3D model section](3D_model).
 
-And a list of the progress of impresion in the [3D Model List](./Doc/3D_Model_List.md).
-  
+And a list of the progress of impresion in the [3D Model List](Doc/3D_Model_List.md).
+
+
+
+<img width=500px src="/Doc/fig/Open_Hand.png" alt="Generic version"></a>
+<img width=500px src="/Doc/fig/Closed_Hand.png" alt="Generic version"></a>
 <!---                   FOTOS
  <img width=500px src="images/../Doc/images/robot_generic.png" alt="Generic version"></a>
-<img width=670px src="images/../Doc/images/noah_generic_2.jpg" alt="Generic version2"></a>
-
-- [Assembly file Noah version](Doc/assembly_noah.md).
-  
+ <img width=670px src="images/../Doc/images/noah_generic_2.jpg" alt="Generic version2"></a>
+- [Assembly file Noah version](Doc/assembly_noah.md).  
 <img width=500px src="images/../Doc/images/robot_noah.png" alt="Noah version"></a>
 <img width=390px src="images/../Doc/images/robot_noah2.png" alt="Noah version2"></a>
 --->
