@@ -23,6 +23,8 @@ The main idea behind this project is inspired on the InMoov project, but we are 
 Take a look to the original project:
 
 - [InMoov's project](https://inmoov.fr/).
+
+
 <img width=500px src="/Doc/fig/InMoov_project.png" alt="Generic version"></a>
 
 ## Mechanics
@@ -36,6 +38,8 @@ And a list of the progress of impresion in the [3D Model List](Doc/3D_Model_List
 
 
 <img width=500px src="/Doc/fig/Open_Hand.png" alt="Generic version"></a>
+
+
 <img width=500px src="/Doc/fig/Closed_Hand.png" alt="Generic version"></a>
 <!---                   FOTOS
  <img width=500px src="images/../Doc/images/robot_generic.png" alt="Generic version"></a>

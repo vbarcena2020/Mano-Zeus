@@ -3,7 +3,7 @@
 ---
 
 Here we have a track of the 3D printed parts of the project
-<img width=400px src="Doc/images/Explode.png" alt="explode"></a>
+
 - [ ] [Dedo Meñique](3D_model/Auriculaire3.stl)
 - [ ] [Espaciador](3D_model/Bolt_entretorise7.stl)
 - [x] [Dedo Indice](3D_model/Index3.stl)
