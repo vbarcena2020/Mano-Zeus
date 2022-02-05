@@ -16,7 +16,7 @@ void ServoM::set_speed(int gear){
   if (gear > 0 ) { Speed = gear + MIN1; }
   else { Speed = gear + MIN2; }
 
-  if (gear == 0){Speed = 0;}
+  if (gear == 0){Speed = 440;}
 }
 
 
@@ -25,4 +25,5 @@ void ServoM::start(int gear){
   set_speed(gear);
   
   analogWrite(PIN, Speed);
+  delay(10);
 }
