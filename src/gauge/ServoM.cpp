@@ -25,4 +25,5 @@ void ServoM::start(int gear){
   set_speed(gear);
   
   analogWrite(PIN, Speed);
+  delay(10);
 }

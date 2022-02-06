@@ -1,0 +1,17 @@
+stoped = 0
+Max 1 = 456
+Min 1 = 4
+
+Max 2 = 431
+Min 2 = 436
+
+354 Parao
+
+258 sigue
+
+100 para
+
+
+510 para
+
+630 sigue1
