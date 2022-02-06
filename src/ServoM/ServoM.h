@@ -7,13 +7,17 @@ class ServoM {
 
   public:
     ServoM(int pin); // Construct
-    
-    void start(int gear);
-    void set_speed(int gear);
+    void turn(int grades); // Gear = 5
+    void turn(int grades, int gear);
+    void set_measured(bool mod){ calibrated = mod; }
+    bool measure_mode();
 
   private:
+    bool calibrated = false;
     int PIN;
     int Speed;
+    int GEAR;
+    int tim;
     int pos = 0;
 
 
@@ -28,21 +32,25 @@ class ServoM {
     int MIN2 = 436;
 
     // Max gear
-    int GEAR = 5;
+    int MAX_GEAR = 5;
 
     //********* Gear's calibration *********
-    // Time to complete a lap
-    TIMEG1 = 0;
-    TIMEG2 = 0;
-    TIMEG3 = 0;
-    TIMEG4 = 0;
-    TIMEG5 = 0;
+    // Time to complete half lap
+    int TG1 = 0;
+    int TG2 = 0;
+    int TG3 = 0;
+    int TG4 = 0;
+    int TG5 = 900;
+
+    int TIMEG[6] = {0, TG1, TG2, TG3, TG4, TG5};
+
+    //********* Private methods *********
+    void start(int gear);
+    void set_speed(int gear);
 
         
     /* Pendiente de implementar:
      *  - Posición en todo momento del servo
-     *  - Calibrador de tiempo x vuelta con encoder
-     *  - Girar un determinado número de grados
      */
     
      
