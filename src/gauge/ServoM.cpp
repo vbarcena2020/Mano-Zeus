@@ -16,7 +16,7 @@ void ServoM::set_speed(int gear){
   if (gear > 0 ) { Speed = gear + MIN1; }
   else { Speed = gear + MIN2; }
 
-  if (gear == 0){Speed = 440;}
+  if (gear == 0){Speed = 0;}
 }
 
 
