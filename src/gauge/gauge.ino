@@ -1,10 +1,10 @@
-#include "ServoM.h"
+#include <Servo.h>
 
    
 int SERVOPIN = 6;
 int BTNPIN = 2; 
 
-ServoM serv1 = ServoM(SERVOPIN);
+Servo serv1;
 
 // Change global variable
 int value = 0;
@@ -12,8 +12,11 @@ int total = 0;
 
 void setup() {
   Serial.begin(9600);
+  serv1.attach(SERVOPIN);
+  
 
   pinMode(BTNPIN, INPUT_PULLUP);  
+  serv1.write(0);
 }
 
 void loop() {
@@ -27,13 +30,13 @@ void loop() {
 
    // While the botton is pressed
   while (!digitalRead(BTNPIN)){
-    serv1.start(vel);
+    
     push = true;
     time1 = millis();
   }
 
   // The button is not pressed
-  serv1.start(0);
+ 
 
   // We add the new time value if the button was pressed
   if (push){

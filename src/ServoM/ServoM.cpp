@@ -20,7 +20,7 @@ void ServoM::set_speed(int gear){
 
   if (gear == 0){Speed = 0;}
 
-  tim = TIMEG[gear];
+  tim = TG5;
 }
 
 

@@ -40,7 +40,7 @@ class ServoM {
     int TG2 = 0;
     int TG3 = 0;
     int TG4 = 0;
-    int TG5 = 900;
+    int TG5 = 6;
 
     int TIMEG[6] = {0, TG1, TG2, TG3, TG4, TG5};
 

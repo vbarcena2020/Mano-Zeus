@@ -1,22 +1,29 @@
-#include "ServoM.h"
+#include <Servo.h>
 
-   
-int SERVOPIN = 6;
+Servo myservo;  // create servo object to control a servo
+// twelve servo objects can be created on most boards
 
-ServoM serv1 = ServoM(SERVOPIN);
-
-// Change global variable
-int value = 0;
-int total = 0;
+int pos = 0;    // variable to store the servo position
 
 void setup() {
-  Serial.begin(9600);  
+  Serial.begin(9600);
+  myservo.attach(6);  // attaches the servo on pin 9 to the servo object
 }
 
 void loop() {
-  // Initial values of each variable
-  int vel = 5;
-  serv1.turn(60);
-  while(! serv1.measure_mode());
+  int in = 2;
+  int tim = 100;
+    // in steps of 1 degree
+    // 102
+    for (int i = 80 ; i <= 180 ; i += 1){
+      Serial.println(i);
+      myservo.write(i);
+      delay(2000);
+    }
+  
+  
 
+  myservo.detach();
+  while(1);
+  
 }
