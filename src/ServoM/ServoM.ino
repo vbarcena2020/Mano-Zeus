@@ -1,22 +1,20 @@
 #include "ServoM.h"
 
-   
-int SERVOPIN = 6;
 
-ServoM serv1 = ServoM(SERVOPIN);
+#define PINSERVO1  6  
+#define PINSERVO2  7
+#define PINSERVO3  8
 
-// Change global variable
-int value = 0;
-int total = 0;
+
+ServoM servo1;
+
 
 void setup() {
-  Serial.begin(9600);  
+  Serial.begin(9600);
+  servo1.attach(PINSERVO3);
 }
 
 void loop() {
-  // Initial values of each variable
-  int vel = 5;
-  serv1.turn(60);
-  while(! serv1.measure_mode());
-
+  servo1.turn(860);
+  while(true);
 }

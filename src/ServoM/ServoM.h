@@ -1,58 +1,47 @@
 
+#include <Servo.h>
+
 #ifndef SERVOM_H_INCLUDED
 #define SERVO_H_INCLUDED
 
-// Heredate original servo?
-class ServoM {
+class ServoM : public Servo {
 
   public:
-    ServoM(int pin); // Construct
-    void turn(int grades); // Gear = 5
-    void turn(int grades, int gear);
-    void set_measured(bool mod){ calibrated = mod; }
-    bool measure_mode();
-
-  private:
-    bool calibrated = false;
-    int PIN;
-    int Speed;
-    int GEAR;
-    int tim;
-    int pos = 0;
-
-
-
-    //********* Pulse width values *********
-    //** Direction 1
-    int MAX1 = 456;
-    int MIN1 = 451;
-
-    //** Direction 2
-    int MAX2 = 431;
-    int MIN2 = 436;
-
-    // Max gear
-    int MAX_GEAR = 5;
-
-    //********* Gear's calibration *********
-    // Time to complete half lap
-    int TG1 = 0;
-    int TG2 = 0;
-    int TG3 = 0;
-    int TG4 = 0;
-    int TG5 = 900;
-
-    int TIMEG[6] = {0, TG1, TG2, TG3, TG4, TG5};
-
-    //********* Private methods *********
-    void start(int gear);
-    void set_speed(int gear);
-
-        
-    /* Pendiente de implementar:
-     *  - Posición en todo momento del servo
-     */
+    ServoM(){} // Construct
     
+    void turn(double grades);
+    void get_pos() { return pos_;}
+
+    
+  private:
+    Servo servo_; 
+
+    int pos_;
+    const static int STEP_ = 5; /* Acceleration */
+    
+    /* Pulse width values */
+    const static int TACEL_ = 60;
+    const static int LEFT_ = 83 + STEP_;  /* Decrease value to increase velocity */
+    const static int RIGHT_ = 103 - STEP_;  /* Increase value to increase velocity */  
+    const static int STOP_ = 90;
+    
+    
+
+
+    /* Calibration */
+    bool calibrated_ = false;
+    const float TIMEFORW_ = 843;  /* Time to complete half loop 180º */
+    const float TIMEBACK_ = 826;
+    int min_pos_ = -180;
+    int max_pos_ = 180;
+    
+
+    /* Private methods*/ 
+    void Forward();
+    void Backward();
+    void Stop();
+
+    double check_grades(double grades);
      
 };
 

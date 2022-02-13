@@ -1,59 +1,74 @@
 
-
 #include "ServoM.h"
 #include "Arduino.h"
 
-ServoM::ServoM(int pin){ // Construct
-  PIN = pin;
-  pinMode(pin, OUTPUT);
-}
+/* States of turn */ 
+enum
+{
+  FORWARD = 0,
+  BACKWARD = 1,
+};
 
-void ServoM::set_speed(int gear){
 
-  GEAR = gear;
-  
-  if (gear > MAX_GEAR){ gear = MAX_GEAR; }
-  if (gear < -MAX_GEAR) { gear = -MAX_GEAR; }
-  
-  if (gear > 0 ) { Speed = gear + MIN1; }
-  else { Speed = gear + MIN2; }
-
-  if (gear == 0){Speed = 0;}
-
-  tim = TIMEG[gear];
+void ServoM::Forward()
+{
+  for (int i = LEFT_ ; i >= LEFT_ - STEP_ ; i--) {
+    this->write(i);
+    delay(TACEL_);
+    }
 }
 
 
-// Starts the servo
-void ServoM::start(int gear){
-  set_speed(gear);
-  
-  analogWrite(PIN, Speed);
-  delay(20);
+void ServoM::Backward()
+{
+  for (int i = RIGHT_ ; i <= RIGHT_ + STEP_ ; i++) {
+    this->write(i);
+    delay(TACEL_);
+    }
 }
 
 
-// Turns de servo the selected grades
-void ServoM::turn(int grades, int gear){
+void ServoM::Stop(){ this->write(STOP_); }
 
-  // If the grades exceeds 180 grades, it stays in 180º
-  if (pos + grades > 180){ grades = 180 - pos;}
-  if (pos - grades < -180) {grades = -180 + pos;}
-
-  if (grades != 0){ start(gear);}
+double ServoM::check_grades(double grades)
+{
+   /* Limit forward*/
+   if (pos_ + grades > max_pos_){ grades = max_pos_ - pos_; }
   
-  delay(180/(grades*tim));
-  start(0);
+
+   if (grades < 0) {
+    /* Limit backward and changes mode */
+    if ((pos_ + grades) < min_pos_) { grades = min_pos_- pos_; }  
+    }  
+
+    return grades;
 }
 
+void ServoM::turn(double grades){
+  int mode = FORWARD;
+  double tim;
 
+  grades = check_grades(grades);
 
-void ServoM::turn(int grades){ turn(grades, 5); }
+  if (grades < 0){ mode = BACKWARD ; grades *= -1; }
+  if (grades == 0){ Stop();}
 
-bool ServoM::measure_mode(){
-  // Que localize los grados máximos y los minimos y empize el calibrado
-  // Hacer calibrado en otro punto h
-  Serial.println("1");
-  delay(1000);
-  return calibrated;
+  /* Moves the servo forward */
+  if (mode == FORWARD && grades != 0){
+    Forward();
+
+    tim = (grades/180)*TIMEFORW_;
+    pos_ += grades;
+  } 
+  
+  /* Moves the servo backward */
+  if (mode == BACKWARD && grades != 0){
+    Backward();
+    
+    tim = (grades/180)*TIMEBACK_;
+    pos_ -= grades;
   }
+
+  delay(tim);
+  Stop();
+}
