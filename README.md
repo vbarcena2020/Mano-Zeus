@@ -70,4 +70,6 @@ The PCB was designed with Kicad. Take a look to the [PCB section](./noah-hardwar
 
 - [InMoov Members](https://inmoov.fr/) - Idea & Initial work# Mano-Zeus
 ### Members 
-Añadir nombres de cada uno aquí
+Juan Miguel Valverde Garcia
+
+Javier Mayorga Caro
