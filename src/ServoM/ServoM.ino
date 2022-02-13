@@ -1,5 +1,4 @@
-#include "./ServoM.h"
-#include <Servo.h>
+#include "ServoM.h"
 
 
 #define PINSERVO1  6  
@@ -16,6 +15,6 @@ void setup() {
 }
 
 void loop() {
-  servo1.turn(180);
+  servo1.turn(860);
   while(true);
 }
