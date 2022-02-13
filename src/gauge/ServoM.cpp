@@ -1,29 +1,45 @@
-
+#include <Servo.h>
 
 #include "ServoM.h"
 #include "Arduino.h"
 
-ServoM::ServoM(int pin){ // Construct
-  PIN = pin;
-  pinMode(pin, OUTPUT);
+void ServoM::Forward()
+{
+  for (int i = LEFT ; i >= LEFT - STEP ; i--) {
+    this->write(i);
+    delay(TACEL);
+    }
 }
 
-void ServoM::set_speed(int gear){
-  
-  if (gear > GEAR){ gear = GEAR; }
-  if (gear < -GEAR) { gear = -GEAR; }
-  
-  if (gear > 0 ) { Speed = gear + MIN1; }
-  else { Speed = gear + MIN2; }
-
-  if (gear == 0){Speed = 0;}
+void ServoM::Backward()
+{
+  for (int i = RIGHT ; i <= RIGHT + STEP ; i++) {
+    this->write(i);
+    delay(TACEL);
+    }
 }
 
 
-// Starts the servo
-void ServoM::start(int gear){
-  set_speed(gear);
+void ServoM::Stop(){ this->write(STOP); }
+
+
+void ServoM::turn(int grades){
+
+  // If the grades exceeds 180 grades, it stays in 180º
+  if (pos + grades > 180){ grades = 180 - pos;}
+  if (pos - grades < -180) {grades = -180 + pos;}
+
+  if (grades != 0){ Stop();}
   
-  analogWrite(PIN, Speed);
-  delay(10);
+  delay(180/(grades*TIMEHALF));
+  Stop();
 }
+
+
+bool ServoM::measure_mode(){
+  // Que localize los grados máximos y los minimos y empize el calibrado
+  // Hacer calibrado en otro punto h
+  Serial.println("1");
+  delay(1000);
+  return calibrated;
+  }

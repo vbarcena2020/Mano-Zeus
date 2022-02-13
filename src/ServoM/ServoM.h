@@ -23,18 +23,20 @@ class ServoM : public Servo {
     Servo servo; 
 
     int pos;
-
-    /* Pulse width values */
-    const static int LEFT = 83;  /* Decrease value to increase velocity */
-    const static int RIGHT = 98;  /* Increase value to increase velocity */  
-    const static int STOP = 93;
-    
     const static int STEP = 5; /* Acceleration */
+    /* Pulse width values */
+    const static int TACEL = 60;
+    const static int LEFT = 83 + STEP;  /* Decrease value to increase velocity */
+    const static int RIGHT = 103 - STEP;  /* Increase value to increase velocity */  
+    const static int STOP = 90;
+    
+    
 
 
     /* Calibration */
     bool calibrated = false;
-    static const int TIMEHALF = 860;  /* Time to complete half loop */
+    const float TIMEFORW = 9843;  /* Time to complete half loop 180*/
+    const float TIMEBACK = 946;
     int min_pos = 0;
     int max_pos = 180;
     

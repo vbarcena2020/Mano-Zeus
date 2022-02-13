@@ -1,4 +1,4 @@
-#include "ServoM.h"
+#include "./ServoM.h"
 #include <Servo.h>
 
 
@@ -8,23 +8,14 @@
 
 
 ServoM servo1;
-Servo servo2;
+
 
 void setup() {
   Serial.begin(9600);
-  servo1.attach(PINSERVO1);
+  servo1.attach(PINSERVO3);
 }
 
 void loop() {
-   servo1.Backward();
-   delay(2000);
-
-   servo1.Stop();
-   delay(2000);
-   
-   servo1.Forward();
-   delay(2000);
-    
-   servo1.Stop();
-   delay(2000); 
+  servo1.turn(180);
+  while(true);
 }
