@@ -15,6 +15,7 @@ void setup() {
 }
 
 void loop() {
-  servo1.turn(860);
+  servo1.turn(-180);
+  servo1.turn(180);
   while(true);
 }

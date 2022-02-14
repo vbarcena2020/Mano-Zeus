@@ -32,7 +32,7 @@ class ServoM : public Servo {
     bool calibrated_ = false;
     const float TIMEFORW_ = 843;  /* Time to complete half loop 180º */
     const float TIMEBACK_ = 826;
-    int min_pos_ = -180;
+    int min_pos_ = 0;
     int max_pos_ = 180;
     
 
