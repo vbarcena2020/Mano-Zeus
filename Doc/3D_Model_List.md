@@ -20,4 +20,4 @@ Here we have a track of the 3D printed parts of the project
 - [ ] [Robcap5V4](../3D_model/robcap5V4.stl)
 - [x] [Duda Pulgar](../3D_model/thumb5.stl)
 - [ ] [Cubierta Superior](../3D_model/topsurface6.stl)
-- [x] [CableHolderWristV5](../3D_model/CableHolerWristV5.stl)
+- [x] [CableHolderWristV5](../3D_model/CableHolderWristV5.stl)
