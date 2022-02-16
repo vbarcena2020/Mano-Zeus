@@ -25,7 +25,7 @@ Here we have a track of the 3D printed parts of the project
 - [x] [RotaWrist 2V3](../3D_model/RotaWrist2V3.stl)
 - [ ] [RotaWrist 1V4](../3D_model/RotaWrist1V4.stl)
 - [x] [WristgearsV5](../3D_model/WristgearsV5.stl)
-- [ ] [RobcableBackV3](../3D_model/RobCableBackV3.stl)
+- [x] [RobcableBackV3](../3D_model/RobCableBackV3.stl)
 - [ ] [RobcableFrontV3](../3D_model/RobCableFrontV3.stl)
 - [ ] [RobRingV3](../3D_model/RobRingV3.stl)
 - [ ] [RobServoBedV6](../3D_model/RobServoBedV6.stl)
