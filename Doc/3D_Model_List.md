@@ -28,6 +28,6 @@ Here we have a track of the 3D printed parts of the project
 - [x] [RobcableBackV3](../3D_model/RobCableBackV3.stl)
 - [ ] [RobcableFrontV3](../3D_model/RobCableFrontV3.stl)
 - [ ] [RobRingV3](../3D_model/RobRingV3.stl)
-- [ ] [RobServoBedV6](../3D_model/RobServoBedV6.stl)
+- [x] [RobServoBedV6](../3D_model/RobServoBedV6.stl)
 - [ ] [TensionerRightV1](../3D_model/TensionerRightV1.stl)
 - [ ] [Servo-pulleyX5](../3D_model/servo-pulleyX5.stl)
