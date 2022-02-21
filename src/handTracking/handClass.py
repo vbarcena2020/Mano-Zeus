@@ -1,18 +1,19 @@
 # You have to use your right hand
 
-from turtle import position
-from unittest import result
 import cv2
 import mediapipe as mp
 import time
+import serial
 
+PORT = '/dev/ttyACM0'
+SERIALBEGIN = 9600
+INIT_CHAR = "$"
 
 COLOR_LETTERS = (255, 255, 255)
 COLOR_USED_NODES = (0, 255, 0)
 COLOR_REFERENCE_NODES = (255, 255, 0)
 
 RATIO_NODES = 4
-
 
 USED_NODES = (4, 8, 12, 16, 20)
 REFERENCE_NODES = (5, 13)
@@ -25,9 +26,6 @@ PINKY_FINGER = 20
 
 REFERENCE_THUMB = 5
 REFERENCE_UPPER = 13
-
-
-
 
 class handDetector():
     def __init__(self):
@@ -42,6 +40,7 @@ class handDetector():
         self.hands = self.mpHands.Hands(self.mode, self.maxHands, self.detectionCon, self.trackCon)
         self.mpDraw = mp.solutions.drawing_utils
         
+
     def findHands(self,img, draw = True):
         imgRGB = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
         self.results = self.hands.process(imgRGB)
@@ -51,6 +50,7 @@ class handDetector():
                 if draw:
                     self.mpDraw.draw_landmarks(img, handLms, self.mpHands.HAND_CONNECTIONS)
         return img
+
 
     def getNodesPosition(self):
 
@@ -67,12 +67,14 @@ class handDetector():
 
         return lmlist
 
+
     def showFps(self, img):
         cTime = time.time()
         fps = 1 / (cTime - self.pTime_)
         self.pTime_ = cTime
 
         cv2.putText(img, str(int(fps)), (10, 70), cv2.FONT_HERSHEY_PLAIN, 3, COLOR_LETTERS, 3)
+
 
     def showNodes(self, img, cap, nodes, color):
         all_points = self.results.multi_hand_landmarks
@@ -86,6 +88,7 @@ class handDetector():
                 pixelCoordinates = self.mpDraw._normalized_to_pixel_coordinates(landmark.x, landmark.y, frameWidth, frameHeight)
                 cv2.circle(img, pixelCoordinates, RATIO_NODES, color, -1)
     
+
     def getFingersPosition_basic(self, lmlist):
         thumb = 0
         index = 1
@@ -94,7 +97,6 @@ class handDetector():
         pinky = 4
 
         position = [1, 1, 1, 1, 1]  # All fingers up
-
 
         if (lmlist[THUMB_FINGER].x >= lmlist[REFERENCE_THUMB].x):
             position[thumb] = 0 
@@ -112,10 +114,25 @@ class handDetector():
         
         return position
 
+def arrayToString (array):
+    string= INIT_CHAR
+    for i in array:
+        string=string + str(i)
+
+    return string
+
 def main():
 
     cap = cv2.VideoCapture(0)
     detector = handDetector()
+    ser = serial.Serial(
+        port=PORT,
+        baudrate=SERIALBEGIN,
+        parity=serial.PARITY_NONE,
+        stopbits=serial.STOPBITS_ONE,
+        bytesize=serial.EIGHTBITS,
+        timeout=1
+    )
 
     while True:
         success, img = cap.read()
@@ -131,7 +148,11 @@ def main():
 
         if len(lmlist) != 0:
             position = detector.getFingersPosition_basic(lmlist)
-            print (position)
+
+            out = arrayToString(position)
+            print(out, "\n")
+            serialOut = bytes(out, 'utf-8')
+            ser.write(serialOut)
         
         # Shows the image
         cv2.imshow("Image", img)
