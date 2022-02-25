@@ -3,8 +3,8 @@
 enum
 {
   PINSERVO1 = 6,
-  PINSERVO2 = 7,
-  PINSERVO3 = 8,
+  PINSERVO2 = 2,
+  PINSERVO3 = 3,
 
   NUMINVALUES = 5,
   DIGITSPERVAL = 1,
@@ -69,5 +69,4 @@ void loop()
   else {servo2.goTo(0); }
   if (valsIn[4] == 1){servo3.goTo(180); }
   else {servo3.goTo(0); }
-
-}
+  }

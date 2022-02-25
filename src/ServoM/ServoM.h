@@ -23,13 +23,13 @@ class ServoM : public Servo {
     int current_= 0;
     int target_ ;
     bool acelerated_= false;
-    int timef_;
-    int time0_;
+    long timef_;
+    long time0_;
     bool turning_ = false;
     
     /* Pulse width values */
-    const static int TACEL_ = 60;
-    const static int LEFT_ = 83 + STEP_;  /* Decrease value to increase velocity */
+    const static int TACEL_ = 80;
+     const static int LEFT_ = 83 + STEP_;  /* Decrease value to increase velocity */
     const static int RIGHT_ = 103 - STEP_;  /* Increase value to increase velocity */  
     const static int STOP_ = 90;
     

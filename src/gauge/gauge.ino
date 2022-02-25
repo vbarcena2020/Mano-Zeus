@@ -2,9 +2,9 @@
 
 enum
 {
-  SERVOPIN = 8,
+  SERVOPIN = 7,
   BTNPIN = 2,
-  READINGS = 6,
+  READINGS = 1,
 
   FORWARD = 1,
   BACKWARD = 0,
@@ -49,10 +49,10 @@ int calibrate(int mode)
 
   /* While the botton is pressed */
   while (!digitalRead(BTNPIN)){
-    if (time1 == 0){ 
+  
       if (mode == FORWARD) { servo.Forward(); }
       if (mode == BACKWARD) { servo.Backward(); } 
-    }
+    
     push = true;
     time1 = millis();
   }
