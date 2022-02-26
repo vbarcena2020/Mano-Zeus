@@ -2,17 +2,23 @@
 
 enum
 {
-  PINSERVO1 = 6,
-  PINSERVO2 = 2,
-  PINSERVO3 = 3,
+  PINSERVO1 = 7,
+  PINSERVO2 = 8,
+  PINSERVO3 = 9,
+  PINSERVO4 = 10,
+  PINSERVO5 = 11,
+  PINSERVO6 = 12,
 
-  NUMINVALUES = 5,
+  NUMINVALUES = 6,
   DIGITSPERVAL = 1,
 };
-
-ServoM servo1;
-ServoM servo2;
-ServoM servo3;
+int acel = 200;
+ServoM servo1 = ServoM(acel, -180, 180);
+ServoM servo2 = ServoM(acel, -180, 180);
+ServoM servo3 = ServoM(acel, -180, 180);
+ServoM servo4 = ServoM(acel, -180, 180);
+ServoM servo5 = ServoM(acel, -180, 180);
+ServoM servo6 = ServoM(acel*2, -180, 180);
 
 int valsIn[NUMINVALUES];
 int stringLenght = NUMINVALUES * DIGITSPERVAL + 1;
@@ -28,6 +34,9 @@ void setup()
   servo1.attach(PINSERVO1);
   servo2.attach(PINSERVO2);
   servo3.attach(PINSERVO3);
+  servo4.attach(PINSERVO4);
+  servo5.attach(PINSERVO5);
+  servo6.attach(PINSERVO6);
 }
 
 
@@ -65,8 +74,19 @@ void loop()
   receiveData();
   if (valsIn[0] == 1){servo1.goTo(180); }
   else {servo1.goTo(0); }
+  
   if (valsIn[1] == 1){servo2.goTo(180); }
   else {servo2.goTo(0); }
-  if (valsIn[4] == 1){servo3.goTo(180); }
+  
+  if (valsIn[2] == 1){servo3.goTo(180); }
   else {servo3.goTo(0); }
+  
+  if (valsIn[3] == 1){servo4.goTo(180); }
+  else {servo4.goTo(0); }
+  
+  if (valsIn[4] == 1){servo5.goTo(180); }
+  else {servo5.goTo(0); }
+
+  if (valsIn[5] == 1){servo6.goTo(180); }
+  else {servo6.goTo(0); }
   }

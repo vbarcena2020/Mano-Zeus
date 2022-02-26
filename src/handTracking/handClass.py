@@ -16,7 +16,7 @@ COLOR_REFERENCE_NODES = (255, 255, 0)
 RATIO_NODES = 4
 
 USED_NODES = (4, 8, 12, 16, 20)
-REFERENCE_NODES = (5, 13)
+REFERENCE_NODES = (5, 13, 17)
 
 THUMB_FINGER = 4
 INDEX_FINGER = 8
@@ -26,6 +26,7 @@ PINKY_FINGER = 20
 
 REFERENCE_THUMB = 5
 REFERENCE_UPPER = 13
+REFERENCE_WRIST = 17
 
 class handDetector():
     def __init__(self):
@@ -95,10 +96,11 @@ class handDetector():
         middle = 2
         ring = 3
         pinky = 4
+        wrist = 5
 
-        position = [1, 1, 1, 1, 1]  # All fingers up
+        position = [1, 1, 1, 1, 1, 1]  # All fingers up
 
-        if (lmlist[THUMB_FINGER].x >= lmlist[REFERENCE_THUMB].x):
+        if (lmlist[THUMB_FINGER].x <= lmlist[REFERENCE_THUMB].x):
             position[thumb] = 0 
 
         if (lmlist[INDEX_FINGER].y >= lmlist[REFERENCE_UPPER].y):
@@ -109,9 +111,19 @@ class handDetector():
 
         if (lmlist[RING_FINGER].y >= lmlist[REFERENCE_UPPER].y):
             position[ring] = 0 
+
         if (lmlist[PINKY_FINGER].y >= lmlist[REFERENCE_UPPER].y):
             position[pinky] = 0 
-        
+
+        if (lmlist[THUMB_FINGER].x <= lmlist[REFERENCE_WRIST].x):
+            position[wrist] = 0
+
+            if (lmlist[THUMB_FINGER].x >= lmlist[REFERENCE_THUMB].x):
+                position[thumb] = 0
+            else:
+                position[thumb] = 1
+            
+
         return position
 
 def arrayToString (array):
