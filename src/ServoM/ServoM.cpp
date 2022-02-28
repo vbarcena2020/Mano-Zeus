@@ -9,66 +9,90 @@ enum
   BACKWARD = 1,
 };
 
+ServoM::ServoM(float time_turn, int min_pos, int max_pos)
+{
+  timeTurn_ = time_turn;
+  min_pos_ = min_pos;
+  max_pos_ = max_pos;
+}
 
 void ServoM::Forward()
 {
-  for (int i = LEFT_ ; i >= LEFT_ - STEP_ ; i--) {
-    this->write(i);
-    delay(TACEL_);
+if (! acelerated_)
+  {
+    long mills = millis();    
+    
+    for (int i = 1; i <= STEP_ ; i++)
+    {
+      if (millis() <= (TACEL_ * i) + timef_){ this->write(LEFT_ - i + 1); }
+      if (millis() <= (TACEL_ * STEP_) + timef_){ acelerated_ = true; }
     }
+  }
 }
 
 
 void ServoM::Backward()
 {
-  for (int i = RIGHT_ ; i <= RIGHT_ + STEP_ ; i++) {
-    this->write(i);
-    delay(TACEL_);
+  if (! acelerated_)
+  {
+    long mills = millis();    
+    
+    for (int i = 1; i <= STEP_ ; i++)
+    {
+      if (millis() <= (TACEL_ * i) + timef_){ this->write(RIGHT_ + i - 1); }
+      if (millis() <= (TACEL_ * STEP_) + timef_){ acelerated_ = true; }
     }
+  }
 }
 
 
-void ServoM::Stop(){ this->write(STOP_); }
+void ServoM::Stop(){ this->write(STOP_); acelerated_ = false;}
 
 double ServoM::check_grades(double grades)
 {
    /* Limit forward*/
    if (pos_ + grades > max_pos_){ grades = max_pos_ - pos_; }
   
-
-   if (grades < 0) {
-    /* Limit backward and changes mode */
-    if ((pos_ + grades) < min_pos_) { grades = min_pos_- pos_; }  
-    }  
+   /* Limit backward and changes mode */
+   if (grades < 0 && (pos_ + grades) < min_pos_){ grades = min_pos_- pos_; }  
 
     return grades;
 }
 
-void ServoM::turn(double grades){
-  int mode = FORWARD;
-  double tim;
-
+void ServoM::turn(double grades)
+{
+  long actual_millis = millis();
   grades = check_grades(grades);
-
+  if (grades > 0){ mode = FORWARD ;}
   if (grades < 0){ mode = BACKWARD ; grades *= -1; }
-  if (grades == 0){ Stop();}
 
-  /* Moves the servo forward */
-  if (mode == FORWARD && grades != 0){
-    Forward();
-
-    tim = (grades/180)*TIMEFORW_;
-    pos_ += grades;
-  } 
-  
-  /* Moves the servo backward */
-  if (mode == BACKWARD && grades != 0){
-    Backward();
-    
-    tim = (grades/180)*TIMEBACK_;
-    pos_ -= grades;
+  if (! turning_ && grades != 0)
+  {
+    int mode = FORWARD;
+    time0_ = millis();
+    timef_ = ((grades/180)*timeTurn_) + time0_;
+    target_ = grades;
+    turning_ = true;
   }
 
-  delay(tim);
-  Stop();
+  if (! acelerated_ && turning_){
+    if (mode == FORWARD) { pos_ += grades; Forward() ;}
+    if (mode == BACKWARD) { pos_ -= grades; Backward(); }
+  }
+  
+  if (timef_ <= actual_millis)
+  {
+    Stop();
+    target_ = 0;
+    turning_ = false;
+
+  }
+}
+
+void ServoM::goTo(double grades)
+{
+  grades -= pos_;
+  if (turning_){grades = 0;}
+  
+  turn(grades);
 }

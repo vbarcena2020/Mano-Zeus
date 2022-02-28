@@ -9,39 +9,47 @@ class ServoM : public Servo {
   public:
     ServoM(){} // Construct
     
-    void turn(int grades);
-    void get_pos() { return pos;}
-    
-    void set_measured(bool mod){ calibrated = mod; }
-    bool measure_mode();
+    void turn(double grades);
+    void goTo(double grades);
+    double get_pos() { return pos_;}
 
-    void Forward();
-    void Backward();
-    void Stop();
     
   private:
-    Servo servo; 
+    Servo servo_; 
 
-    int pos;
-    const static int STEP = 5; /* Acceleration */
+    int pos_ = 0;
+    int mode  = 0;
+    const static int STEP_ = 5; /* Acceleration */
+    int current_= 0;
+    int target_ ;
+    bool acelerated_= false;
+    long timef_;
+    long time0_;
+    bool turning_ = false;
+    
     /* Pulse width values */
-    const static int TACEL = 60;
-    const static int LEFT = 83 + STEP;  /* Decrease value to increase velocity */
-    const static int RIGHT = 103 - STEP;  /* Increase value to increase velocity */  
-    const static int STOP = 90;
+    const static int TACEL_ = 80;
+     const static int LEFT_ = 83 + STEP_;  /* Decrease value to increase velocity */
+    const static int RIGHT_ = 103 - STEP_;  /* Increase value to increase velocity */  
+    const static int STOP_ = 90;
     
     
 
 
     /* Calibration */
-    bool calibrated = false;
-    static const int TIMEHALF = 860;  /* Time to complete half loop */
-    int min_pos = 0;
-    int max_pos = 180;
+    bool calibrated_ = false;
+    const float TIMEFORW_ = 843;  /* Time to complete half loop 180º */
+    const float TIMEBACK_ = 1400;
+    int min_pos_ = -180000;
+    int max_pos_ = 1800000;
     
 
-    /* Private methods*/
+    /* Private methods*/ 
+    void Forward();
+    void Backward();
+    void Stop();
 
+    double check_grades(double grades);
      
 };
 
