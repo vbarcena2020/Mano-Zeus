@@ -7,7 +7,7 @@
 class ServoM : public Servo {
 
   public:
-    ServoM(float time_turn, int min_pos, int max_pos); // Construct
+    ServoM(){} // Construct
     
     void turn(double grades);
     void goTo(double grades);
@@ -28,15 +28,20 @@ class ServoM : public Servo {
     bool turning_ = false;
     
     /* Pulse width values */
-    const static int TACEL_ = 50;
-    const static int LEFT_ = 83 + STEP_;  /* Decrease value to increase velocity */
+    const static int TACEL_ = 80;
+     const static int LEFT_ = 83 + STEP_;  /* Decrease value to increase velocity */
     const static int RIGHT_ = 103 - STEP_;  /* Increase value to increase velocity */  
     const static int STOP_ = 90;
     
-    /* Time to complete half loop 180º */
-    float timeTurn_;
-    int min_pos_ ;
-    int max_pos_ ;
+    
+
+
+    /* Calibration */
+    bool calibrated_ = false;
+    const float TIMEFORW_ = 843;  /* Time to complete half loop 180º */
+    const float TIMEBACK_ = 1400;
+    int min_pos_ = -180000;
+    int max_pos_ = 1800000;
     
 
     /* Private methods*/ 
